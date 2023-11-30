@@ -1,0 +1,10 @@
+advent-of-code-data
+black
+flake8
+matplotlib
+mypy
+numpy
+pylint
+scipy
+tox
+tqdm
