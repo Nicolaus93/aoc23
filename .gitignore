@@ -1,2 +1,5 @@
 
 *.txt
+.idea/
+# ignore all pycache directories
+**/__pycache__
