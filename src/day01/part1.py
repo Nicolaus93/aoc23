@@ -23,7 +23,7 @@ def part2(line):
         "six": "6",
         "seven": "7",
         "eight": "8",
-        "nine": "9"
+        "nine": "9",
     }
 
     str_num = []
@@ -61,7 +61,7 @@ def solve(input_f: str, is_part2: bool):
 if __name__ == "__main__":
 
     print("--------------PART-1--------------")
-    print(f"part 1: ", solve("test.txt", False))
+    print("part 1: ", solve("test.txt", False))
 
     print("--------------PART-2--------------")
-    print(f"part 2: ", solve("test.txt", True))
+    print("part 2: ", solve("test.txt", True))
