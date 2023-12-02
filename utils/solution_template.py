@@ -12,7 +12,18 @@ class PlaceHolder:
 
 
 @utils.timeit
-def solve(input_f: str):
+def part1(input_f: str):
+    data = open(input_f).readlines()
+    processed_data = []
+    for line in data:
+        processed_data.append([i for i in line.split()])
+
+    pp(processed_data)
+    return -1
+
+
+@utils.timeit
+def part2(input_f: str):
     data = open(input_f).readlines()
     processed_data = []
     for line in data:
@@ -24,11 +35,10 @@ def solve(input_f: str):
 
 if __name__ == "__main__":
     # test_puzzle
-    print("--------------TEST--------------")
-    res = solve("test.txt")
-    print("test answer: ", res)
+    print("--------------PART-1--------------")
+    print("test answer:", part1("test.txt"))
+    print("part1 answer:", part1("input.txt"))
 
-    # real puzzle
-    print("--------------PUZZLE--------------")
-    res = solve()
-    print("puzzle answer", res)
+    print("--------------PART-2--------------")
+    print("test asnwer: ", part2("test.txt"))
+    print("part2 answer: ", part2("input.txt"))
