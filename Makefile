@@ -8,6 +8,7 @@ solution-dir:
 	mkdir src/day${DAY} 	\
 	&& cp ${FILE_TEMPLATE} src/day${DAY}/part1.py		\
 	&& touch src/day${DAY}/test.txt \
+	&& touch src/day${DAY}/input.txt
 #	&& rpl "day=1" "day=${DAY}" src/day${DAY}/part1.py \
 
 .PHONY: part2
