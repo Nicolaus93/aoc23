@@ -40,5 +40,5 @@ if __name__ == "__main__":
     print("part1 answer:", part1("input.txt"))
 
     print("--------------PART-2--------------")
-    print("test asnwer: ", part2("test.txt"))
+    print("test answer: ", part2("test.txt"))
     print("part2 answer: ", part2("input.txt"))
