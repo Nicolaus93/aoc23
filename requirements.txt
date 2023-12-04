@@ -1,4 +1,4 @@
-advent-of-code-data
+
 black
 flake8
 matplotlib
