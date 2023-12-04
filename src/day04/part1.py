@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import utils
-from collections import Counter
 
 
 @utils.timeit
@@ -23,7 +22,7 @@ def part1(input_f: str):
 @utils.timeit
 def part2(input_f: str):
     data = open(input_f).readlines()
-    count = Counter()
+    count = [0] * len(data)
     for pos, line in enumerate(data):
         count[pos] += 1
         nums = line.split(":")[1].split("|")
@@ -31,14 +30,10 @@ def part2(input_f: str):
         my_nums = set(utils.read_ints(nums[1]))
         common = win_nums.intersection(my_nums)
         for i in range(len(common)):
+            # TODO: except index error?
             count[pos + i + 1] += 1 * count[pos]
 
-    # return the sum in count
-    s = 0
-    for c in count:
-        s += count[c]
-
-    return s
+    return sum(count)
 
 
 if __name__ == "__main__":
@@ -48,5 +43,5 @@ if __name__ == "__main__":
     print("part1 answer:", part1("input.txt"))
 
     # print("--------------PART-2--------------")
-    print("test asnwer: ", part2("test.txt"))
+    print("test answer: ", part2("test.txt"))
     print("part2 answer: ", part2("input.txt"))
