@@ -9,15 +9,15 @@ def solve(matrix_data, is_part2=False):
     m = len(matrix_data[0])
     for i in range(n):
         for j in range(m):
-            if matrix_data[i][j] == '.' or matrix_data[i][j].isdigit():
+            if matrix_data[i][j] == "." or matrix_data[i][j].isdigit():
                 continue
-            if is_part2 and matrix_data[i][j] != '*':
+            if is_part2 and matrix_data[i][j] != "*":
                 continue
             # we have a symbol, look for all adjacent cells and check if they contain digits
             part_numbers = []
 
             # right
-            num = ''
+            num = ""
             col = j + 1
             while col < m and matrix_data[i][col].isdigit():
                 num += matrix_data[i][col]
@@ -26,11 +26,11 @@ def solve(matrix_data, is_part2=False):
                 part_numbers.append(int(num))
 
             # left
-            num = ''
+            num = ""
             col = j - 1
             while col >= 0 and matrix_data[i][col].isdigit():
                 num = matrix_data[i][col] + num
-                matrix_data[i][col] = '.'  # mark as visited
+                matrix_data[i][col] = "."  # mark as visited
                 col -= 1
             if num:
                 part_numbers.append(int(num))
@@ -40,7 +40,7 @@ def solve(matrix_data, is_part2=False):
                 if i + row < 0 or i + row >= n:
                     continue
                 for k in range(-1, 2):
-                    num = '0'
+                    num = ""
                     col = j + k
                     if col < 0 or col >= m or not matrix_data[i + row][col].isdigit():
                         continue
@@ -51,7 +51,7 @@ def solve(matrix_data, is_part2=False):
                     # read the number
                     while start < m and matrix_data[i + row][start].isdigit():
                         num += matrix_data[i + row][start]
-                        matrix_data[i + row][start] = '.'  # mark as visited
+                        matrix_data[i + row][start] = "."  # mark as visited
                         start += 1
                     if num:
                         part_numbers.append(int(num))
