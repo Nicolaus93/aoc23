@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from collections import Counter
 
+from collections import Counter
 import utils
 from dataclasses import dataclass
 
@@ -25,7 +25,9 @@ class Cards:
                 return
             # if there are multiple most common cards, choose the one with the highest value
             most_count = most_common[0][1]
-            highest_val = sorted([i for i in most_common if i[1] == most_count], key=lambda x: VALS[x[0]])[-1][0]
+            highest_val = sorted(
+                [i for i in most_common if i[1] == most_count], key=lambda x: VALS[x[0]]
+            )[-1][0]
             self.score = Cards(self.hand.replace("J", highest_val), True).score
             return
 

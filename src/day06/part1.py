@@ -1,16 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import utils
-from dataclasses import dataclass
-from pprint import pprint as pp
 import re
-
-
-@dataclass
-class PlaceHolder:
-    hello: str
-    world: str
-
 
 @utils.timeit
 def part1(input_f: str):
