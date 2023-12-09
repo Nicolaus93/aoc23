@@ -21,7 +21,9 @@ class MapRange:
 
     def __repr__(self):
         sign = "+" if self.shift > 0 else "-"
-        return f"MapRange({self.source}, {self.stop}, f(x) = x {sign} {abs(self.shift)})"
+        return (
+            f"MapRange({self.source}, {self.stop}, f(x) = x {sign} {abs(self.shift)})"
+        )
 
 
 def merge_intervals(ranges: list[range]):
@@ -110,7 +112,9 @@ def map_ranges(ranges: list[MapRange], seeds_range: range) -> list[range]:
                 else:
                     # r1->s1->r2->s2
                     mapped.append(range(s1 + r.shift, r2 + r.shift))
-                    original.append(range(r2 + 1, s2))  # TODO: we might overcount here -> merge later
+                    original.append(
+                        range(r2 + 1, s2)
+                    )  # TODO: we might overcount here -> merge later
 
     return mapped + original
 
@@ -133,10 +137,14 @@ def part2(input_f: str):
             pass
         elif ranges:
             # compute new ranges
-            seed_ranges = [s for seed_range in seed_ranges for s in map_ranges(ranges, seed_range)]
+            seed_ranges = [
+                s for seed_range in seed_ranges for s in map_ranges(ranges, seed_range)
+            ]
             ranges = []
 
-    seed_ranges = [s for seed_range in seed_ranges for s in map_ranges(ranges, seed_range)]
+    seed_ranges = [
+        s for seed_range in seed_ranges for s in map_ranges(ranges, seed_range)
+    ]
     return min(s.start for s in seed_ranges)
 
 

@@ -3,6 +3,7 @@
 import utils
 import re
 
+
 @utils.timeit
 def part1(input_f: str):
     data = open(input_f).readlines()
