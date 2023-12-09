@@ -25,7 +25,6 @@ def solve(input_f: str, is_part2: bool = False):
                 added.append(diff[0] - added[-1])
             else:
                 added.append(added[-1] + diff[-1])
-        # print(added)
         s += added[-1]
 
     return s
