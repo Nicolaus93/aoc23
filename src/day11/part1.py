@@ -10,7 +10,7 @@ def part1(input_f: str):
     data = open(input_f).readlines()
     processed_data = []
     for line in data:
-        processed_data.append([1 if i == '#' else 0 for i in line.strip()])
+        processed_data.append([1 if i == "#" else 0 for i in line.strip()])
 
     arr = np.array(processed_data)
     # find which rows are all 0s
@@ -24,7 +24,7 @@ def part1(input_f: str):
     idxs = np.where(new_arr)
     # compute all pairwise distances
     pts = np.vstack(idxs).T
-    dists = pdist(pts, metric='cityblock')
+    dists = pdist(pts, metric="cityblock")
     return int(dists.sum())
 
 
@@ -33,7 +33,7 @@ def part2(input_f: str):
     data = open(input_f).readlines()
     processed_data = []
     for line in data:
-        processed_data.append([1 if i == '#' else 0 for i in line.strip()])
+        processed_data.append([1 if i == "#" else 0 for i in line.strip()])
 
     arr = np.array(processed_data)
     # find which rows are all 0s
@@ -61,7 +61,7 @@ def part2(input_f: str):
             pnt[1] += pos * offset
 
     # compute all pairwise distances
-    dists = pdist(pts, metric='cityblock')
+    dists = pdist(pts, metric="cityblock")
     return int(dists.sum())
 
 

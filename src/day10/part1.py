@@ -9,34 +9,34 @@ def solve(input_f: str):
     data = open(input_f).readlines()
     world = []
     start = None
-    for pos, line in enumerate(data):
+    for row, line in enumerate(data):
         world.append([i for i in line.strip()])
         if "S" in line:
-            start = pos, line.index("S")
+            start = row, line.index("S")
 
-    loop = [start, (start[0] + 1, start[1])]  # go down
+    loop = [start, (start[0] + 1, start[1])]  # go down (it works on MY input)
     for _ in range(100000):
-        pos = loop[-1]
-        
-        if world[pos[0]][pos[1]] == "|":
-            connected = [(pos[0] + 1, pos[1]), (pos[0] - 1, pos[1])]
-        elif world[pos[0]][pos[1]] == "-":
-            connected = [(pos[0], pos[1] + 1), (pos[0], pos[1] - 1)]
-        elif world[pos[0]][pos[1]] == "7":
-            connected = [(pos[0], pos[1] - 1), (pos[0] + 1, pos[1])]
-        elif world[pos[0]][pos[1]] == "L":
-            connected = [(pos[0] - 1, pos[1]), (pos[0], pos[1] + 1)]
-        elif world[pos[0]][pos[1]] == "J":
-            connected = [(pos[0], pos[1] - 1), (pos[0] - 1, pos[1])]
-        elif world[pos[0]][pos[1]] == "F":
-            connected = [(pos[0] + 1, pos[1]), (pos[0], pos[1] + 1)]
-        elif world[pos[0]][pos[1]] == "S":
+        p = loop[-1]
+        current = world[p[0]][p[1]]
+        if current == "|":
+            connected = [(p[0] + 1, p[1]), (p[0] - 1, p[1])]
+        elif current == "-":
+            connected = [(p[0], p[1] + 1), (p[0], p[1] - 1)]
+        elif current == "7":
+            connected = [(p[0], p[1] - 1), (p[0] + 1, p[1])]
+        elif current == "L":
+            connected = [(p[0] - 1, p[1]), (p[0], p[1] + 1)]
+        elif current == "J":
+            connected = [(p[0], p[1] - 1), (p[0] - 1, p[1])]
+        elif current == "F":
+            connected = [(p[0] + 1, p[1]), (p[0], p[1] + 1)]
+        elif current == "S":
             break
         else:
             raise ValueError("unknown symbol")
 
-        pos = connected[0] if connected[0] != loop[-2] else connected[1]
-        loop.append(pos)
+        p = connected[0] if connected[0] != loop[-2] else connected[1]
+        loop.append(p)
 
     poly = Polygon(loop)
     bbox = poly.bounds
