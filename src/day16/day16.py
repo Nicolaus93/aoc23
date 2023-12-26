@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import annotations
-from collections import OrderedDict
 import utils
 from dataclasses import dataclass
 
@@ -92,29 +91,6 @@ def get_score(pos_dir_scores: dict[Beam, int]) -> int:
     return score
 
 
-def good_cache(start, world, pos_dir_scores):
-    beams = [start]
-    pos_dir_scores[start] = 0
-    while beams:
-        beam = beams.pop()
-        tile = world[beam.pos[0]][beam.pos[1]]
-        new_beams = beam.update(tile)
-        for b in new_beams:
-            if b.pos[0] >= len(world) or b.pos[1] >= len(world[0]) or b.pos[0] < 0 or b.pos[1] < 0:
-                continue
-            if b not in pos_dir_scores:
-                pos_dir_scores[b] = 0
-                beams.append(b)
-            elif pos_dir_scores[b] > 0:
-                score_until_now = get_score(pos_dir_scores)
-                # TODO: exclude b?
-                # TODO: update dict
-                print("CACHE")
-                return score_until_now + pos_dir_scores[b]
-
-    return pos_dir_scores
-
-
 def solve(beams: list[Beam], world: list[list[str]]) -> int:
     pos_dir_visited = {beams[0]}
     while beams:
@@ -138,10 +114,8 @@ def part1(input_f: str):
     for line in data:
         world.append([i for i in line.strip()])
 
-    # beams = [Beam((0, 0), RIGHT)]
-    # return solve(beams, world)
-    scores = good_cache(Beam((0, 0), RIGHT), world, OrderedDict())
-    return get_score(scores)
+    beams = [Beam((0, 0), RIGHT)]
+    return solve(beams, world)
 
 
 @utils.timeit
@@ -165,32 +139,11 @@ def part2(input_f: str):
     return max_config
 
 
-@utils.timeit
-def part3(input_f: str):
-    data = open(input_f).readlines()
-    world = []
-    for line in data:
-        world.append([i for i in line.strip()])
-
-    max_config = 0
-    rows, cols = len(world), len(world[0])
-    start_up = [Beam((0, i), DOWN) for i in range(cols)]
-    start_down = [Beam((rows - 1, i), UP) for i in range(cols)]
-    start_left = [Beam((i, 0), RIGHT) for i in range(rows)]
-    start_right = [Beam((i, cols - 1), LEFT) for i in range(rows)]
-    starting_pos = start_right + start_up + start_left + start_down
-    scores = OrderedDict()
-    for start in starting_pos:
-        new_scores = good_cache(start, world, scores)
-        scores |= new_scores
-    return max_config
-
-
 if __name__ == "__main__":
     print("--------------PART-1--------------")
     print("test answer:", part1("test.txt"))
     print("part1 answer:", part1("input.txt"))
 
     # print("--------------PART-2--------------")
-    print("test answer: ", part3("test.txt"))
+    print("test answer: ", part2("test.txt"))
     print("part2 answer: ", part2("input.txt"))
